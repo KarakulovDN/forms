@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        {% if object.image %}
+        <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.name }}">
+        {% endif %}
+        <div class="card-body">
+            <h1 class="card-title">{{ object.name }}</h1>
+            <p class="card-text">{{ object.description }}</p>
+            <p class="text-muted">Цена: {{ object.price }} руб.</p>
+            <p>Статус: {% if object.is_active %}Активен{% else %}Не активен{% endif %}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'catalog:product_update' object.pk %}" class="btn btn-warning">Изменить</a>
+            <a href="{% url 'catalog:product_delete' object.pk %}" class="btn btn-danger">Удалить</a>
+            <a href="{% url 'catalog:product_list' %}" class="btn btn-secondary">Назад к списку</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
